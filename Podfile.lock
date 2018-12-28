@@ -1,0 +1,29 @@
+PODS:
+  - SwiftLint (0.29.1)
+  - swiftlint-config (1.0.8):
+    - SwiftLint
+
+DEPENDENCIES:
+  - "swiftlint-config (from `git@github.com:appbooster/swiftlint-config.git`, tag `1.0.8`)"
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftLint
+
+EXTERNAL SOURCES:
+  swiftlint-config:
+    :git: "git@github.com:appbooster/swiftlint-config.git"
+    :tag: 1.0.8
+
+CHECKOUT OPTIONS:
+  swiftlint-config:
+    :git: "git@github.com:appbooster/swiftlint-config.git"
+    :tag: 1.0.8
+
+SPEC CHECKSUMS:
+  SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
+  swiftlint-config: 5d9f867f77ea387f0413e21f0b3d654fdf7cde54
+
+PODFILE CHECKSUM: fcc59bdf468fef1b70919866f87602d0668f7bf6
+
+COCOAPODS: 1.5.3

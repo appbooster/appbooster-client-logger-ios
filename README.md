@@ -1,4 +1,4 @@
-# logger-ios
+# client-logger-ios
 
 Private framework for client logging of Appbooster organization iOS mobile apps.
 
