@@ -12,7 +12,10 @@ import MessageUI
 class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
   private var textView: UITextView!
+  private var activityIndicatorViewView: UIView!
   private var activityIndicatorView: UIActivityIndicatorView!
+
+  private let activityIndicatorViewSize: CGFloat = 66.0
 
   var file: String!
   var reloadList: (() -> Void)!
@@ -41,18 +44,31 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     textView.isEditable = false
     view.addSubview(textView)
 
+    activityIndicatorViewView = UIView()
+    activityIndicatorViewView.backgroundColor = .white
+    activityIndicatorViewView.layer.cornerRadius = 10.0
+    activityIndicatorViewView.layer.borderWidth = 1.0
+    activityIndicatorViewView.frame = CGRect(
+      x: 0.0, y: 0.0,
+      width: activityIndicatorViewSize, height: activityIndicatorViewSize
+    )
+    activityIndicatorViewView.isHidden = true
+
     activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     activityIndicatorView.color = .black
     activityIndicatorView.startAnimating()
-    activityIndicatorView.isHidden = true
-    view.addSubview(activityIndicatorView)
+    activityIndicatorViewView.addSubview(activityIndicatorView)
+
+    view.addSubview(activityIndicatorViewView)
   }
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
 
     textView.frame = view.bounds
-    activityIndicatorView.center = view.center
+    activityIndicatorViewView.center = view.center
+    activityIndicatorView.center = CGPoint(x: activityIndicatorViewSize / 2,
+                                           y: activityIndicatorViewSize / 2)
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -135,7 +151,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
   }
 
   private func refreshLog() {
-    activityIndicatorView.isHidden = false
+    activityIndicatorViewView.isHidden = false
 
     ClientLogger.readLogFromFile(file, completion: { [weak self] log in
       guard let self = self else { return }
@@ -143,7 +159,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
       self.textView.text = log
 
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-        self.activityIndicatorView.isHidden = true
+        self.activityIndicatorViewView.isHidden = true
       })
     })
   }
