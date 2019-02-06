@@ -31,14 +31,18 @@ public class ClientLogger: NSObject {
     }
   }
   static public private(set) var writingEnabled: Bool = false
+  static public private(set) var urlToUpload: URL?
   static private var blocks: [() -> Void] = []
 
-  static private let accessQueue = DispatchQueue(label: "LogsAccess")
+  static private let accessQueue = DispatchQueue(label: "LogsAccess",
+                                                 qos: .background,
+                                                 attributes: .concurrent)
 
   // MARK: Activation
 
-  static public func activate(writeLogs: Bool) {
+  static public func activate(writeLogs: Bool, uploadToURL: URL? = nil) {
     writingEnabled = writeLogs
+    urlToUpload = uploadToURL
     activated = true
   }
 
@@ -74,7 +78,7 @@ public class ClientLogger: NSObject {
         }
       }
 
-      accessQueue.sync {
+      accessQueue.async(flags: .barrier) {
         let fileHandle = FileHandle(forWritingAtPath: filePath)
         fileHandle?.seekToEndOfFile()
 
@@ -170,7 +174,7 @@ public class ClientLogger: NSObject {
     guard let filePath = pathToFile(file),
       FileManager.default.fileExists(atPath: filePath) else { return }
 
-    accessQueue.sync {
+    accessQueue.async(flags: .barrier) {
       do {
         try FileManager.default.removeItem(atPath: filePath)
       } catch let error {
@@ -182,7 +186,7 @@ public class ClientLogger: NSObject {
   // MARK: Open Log
 
   static public func add5TapsGestureToView(_ view: UIView) -> UITapGestureRecognizer {
-    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openLogs))
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sendOrOpenLogs))
     gestureRecognizer.numberOfTapsRequired = 5
     view.addGestureRecognizer(gestureRecognizer)
 
@@ -201,16 +205,26 @@ public class ClientLogger: NSObject {
   @objc
   static private func handleLongPressGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
     if gestureRecognizer.state == .began {
-      ClientLogger.openLogs()
+      ClientLogger.sendOrOpenLogs()
     }
   }
 
   @objc
+  static public func sendOrOpenLogs() {
+    if let url = urlToUpload {
+      // TODO: upload log to url and show UI feedback to user
+    } else {
+      openLogs()
+    }
+  }
+
   static public func openLogs() {
     let vc = ClientLoggerListViewController()
     let nc = UINavigationController(rootViewController: vc)
     nc.navigationBar.isTranslucent = false
     nc.navigationBar.isOpaque = true
+    nc.navigationBar.tintColor = .black
+    nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
     nc.modalPresentationStyle = .overCurrentContext
     nc.modalTransitionStyle = .coverVertical
     UIApplication.shared.keyWindow?.rootViewController?.present(nc, animated: true, completion: nil)
