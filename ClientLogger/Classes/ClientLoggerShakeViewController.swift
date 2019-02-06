@@ -8,17 +8,17 @@
 
 import UIKit
 
-public class ClientLoggerShakeViewController: UIViewController {
+open class ClientLoggerShakeViewController: UIViewController {
 
-  public var file: String = ClientLogger.defaultLogFile
+  open var file: String = ClientLogger.defaultLogFile
 
   // MARK: UIResponder
 
-  override public var canBecomeFirstResponder: Bool {
+  override open var canBecomeFirstResponder: Bool {
     return true
   }
 
-  override public func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+  override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
     if motion == .motionShake {
       ClientLogger.openLogs()
     }
@@ -26,7 +26,7 @@ public class ClientLoggerShakeViewController: UIViewController {
 
   // MARK: UIViewController
 
-  override public func viewDidLoad() {
+  override open func viewDidLoad() {
     super.viewDidLoad()
 
     becomeFirstResponder()
