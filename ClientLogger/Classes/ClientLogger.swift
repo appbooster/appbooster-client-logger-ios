@@ -42,7 +42,8 @@ public class ClientLogger: NSObject {
   // MARK: Activation
 
   static public func activate(writeLogs: Bool, uploadToURL: URL? = nil) {
-    rename(defaultLogFile, to: prevDefaultLogFile)
+    removeLogFile(prevDefaultLogFile)
+    renameLogFile(defaultLogFile, to: prevDefaultLogFile)
     writingEnabled = writeLogs
     urlToUpload = uploadToURL
     activated = true
@@ -185,6 +186,20 @@ public class ClientLogger: NSObject {
     }
   }
 
+  // MARK: Rename
+
+  static private func renameLogFile(_ file: String, to: String) {
+    guard let filePath = pathToFile(file),
+      let toPath = pathToFile(to),
+      FileManager.default.fileExists(atPath: filePath) else { return }
+
+    do {
+      try FileManager.default.moveItem(atPath: filePath, toPath: toPath)
+    } catch let error {
+      print(error)
+    }
+  }
+
   // MARK: Open Log
 
   static public func add5TapsGestureToView(_ view: UIView) -> UITapGestureRecognizer {
@@ -265,18 +280,6 @@ public class ClientLogger: NSObject {
     guard let logs = logsPath else { return nil }
 
     return "\(logs)/\(file.replacingOccurrences(of: "/", with: ""))"
-  }
-
-  static private func rename(_ file: String, to: String) {
-    guard let filePath = pathToFile(file),
-      let toPath = pathToFile(to),
-      FileManager.default.fileExists(atPath: filePath) else { return }
-
-    do {
-      try FileManager.default.moveItem(atPath: filePath, toPath: toPath)
-    } catch let error {
-      print(error)
-    }
   }
 
 }
