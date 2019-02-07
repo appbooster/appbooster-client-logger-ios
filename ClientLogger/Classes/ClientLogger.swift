@@ -193,10 +193,12 @@ public class ClientLogger: NSObject {
       let toPath = pathToFile(to),
       FileManager.default.fileExists(atPath: filePath) else { return }
 
-    do {
-      try FileManager.default.moveItem(atPath: filePath, toPath: toPath)
-    } catch let error {
-      print(error)
+    accessQueue.async(flags: .barrier) {
+      do {
+        try FileManager.default.moveItem(atPath: filePath, toPath: toPath)
+      } catch let error {
+        print(error)
+      }
     }
   }
 
