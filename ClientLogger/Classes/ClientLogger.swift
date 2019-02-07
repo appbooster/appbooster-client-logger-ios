@@ -18,6 +18,7 @@ private let sharedDateFormatter: DateFormatter = {
 public class ClientLogger: NSObject {
 
   static public let defaultLogFile: String = "DefaultLog"
+  static public let prevDefaultLogFile: String = "PrevDefaultLog"
 
   static private var activated: Bool = false {
     didSet {
@@ -41,6 +42,7 @@ public class ClientLogger: NSObject {
   // MARK: Activation
 
   static public func activate(writeLogs: Bool, uploadToURL: URL? = nil) {
+    rename(defaultLogFile, to: prevDefaultLogFile)
     writingEnabled = writeLogs
     urlToUpload = uploadToURL
     activated = true
@@ -263,6 +265,18 @@ public class ClientLogger: NSObject {
     guard let logs = logsPath else { return nil }
 
     return "\(logs)/\(file.replacingOccurrences(of: "/", with: ""))"
+  }
+
+  static private func rename(_ file: String, to: String) {
+    guard let filePath = pathToFile(file),
+      let toPath = pathToFile(to),
+      FileManager.default.fileExists(atPath: filePath) else { return }
+
+    do {
+      try FileManager.default.moveItem(atPath: filePath, toPath: toPath)
+    } catch let error {
+      print(error)
+    }
   }
 
 }
