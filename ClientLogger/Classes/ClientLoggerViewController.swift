@@ -28,13 +28,14 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     let backBarButton = UIBarButtonItem(title: "←", style: .plain, target: self, action: #selector(back))
     let removeBarButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
     let mailBarButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(mail))
+    let shareBarButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
     let refreshBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
     let downBarButton = UIBarButtonItem(title: "↓", style: .plain, target: self, action: #selector(scrollToBottom))
     let upBarButton = UIBarButtonItem(title: "↑", style: .plain, target: self, action: #selector(scrollToTop))
     let copyAllButton = UIBarButtonItem(title: "❐", style: .plain, target: self, action: #selector(copyAll))
 
     navigationItem.setLeftBarButtonItems([
-      backBarButton, removeBarButton, mailBarButton
+      backBarButton, removeBarButton, mailBarButton, shareBarButton
       ], animated: false)
     navigationItem.setRightBarButtonItems([
       refreshBarButton, downBarButton, upBarButton, copyAllButton
@@ -60,6 +61,8 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     activityIndicatorViewView.addSubview(activityIndicatorView)
 
     view.addSubview(activityIndicatorViewView)
+
+    textView.text = "If you want to see this log press ↻ button"
   }
 
   override func viewDidLayoutSubviews() {
@@ -69,12 +72,6 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     activityIndicatorViewView.center = view.center
     activityIndicatorView.center = CGPoint(x: activityIndicatorViewSize / 2,
                                            y: activityIndicatorViewSize / 2)
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    refreshLog()
   }
 
   // MARK: MFMailComposeViewControllerDelegate
@@ -124,6 +121,15 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     }))
     alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     present(alertController, animated: true, completion: nil)
+  }
+
+  @objc
+  private func share() {
+    if let path = ClientLogger.pathToFile(file) {
+      let url = URL(fileURLWithPath: path)
+      let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+      present(vc, animated: true, completion: nil)
+    }
   }
 
   @objc
