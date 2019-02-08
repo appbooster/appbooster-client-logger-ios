@@ -61,6 +61,8 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     activityIndicatorViewView.addSubview(activityIndicatorView)
 
     view.addSubview(activityIndicatorViewView)
+
+    textView.text = "If you want to see this log press ↻ button"
   }
 
   override func viewDidLayoutSubviews() {
@@ -70,12 +72,6 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     activityIndicatorViewView.center = view.center
     activityIndicatorView.center = CGPoint(x: activityIndicatorViewSize / 2,
                                            y: activityIndicatorViewSize / 2)
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    refreshLog()
   }
 
   // MARK: MFMailComposeViewControllerDelegate
