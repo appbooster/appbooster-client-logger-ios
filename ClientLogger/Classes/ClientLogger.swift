@@ -19,6 +19,7 @@ public class ClientLogger: NSObject {
 
   static public let defaultLogFile: String = "DefaultLog"
   static public let prevDefaultLogFile: String = "PrevDefaultLog"
+  static public let suffix: String = ".txt"
 
   static private var activated: Bool = false {
     didSet {
@@ -262,7 +263,7 @@ public class ClientLogger: NSObject {
       print(error)
     }
 
-    return logsList
+    return logsList.map({ $0.replacingOccurrences(of: suffix, with: "") })
   }
 
   static private func documentsPathWithPathComponent(_ pathComponent: String) -> String? {
@@ -278,10 +279,10 @@ public class ClientLogger: NSObject {
     return documentsPathWithPathComponent("logs")
   }
 
-  static private func pathToFile(_ file: String) -> String? {
+  static func pathToFile(_ file: String) -> String? {
     guard let logs = logsPath else { return nil }
 
-    return "\(logs)/\(file.replacingOccurrences(of: "/", with: ""))"
+    return "\(logs)/\(file.replacingOccurrences(of: "/", with: ""))\(suffix)"
   }
 
 }
