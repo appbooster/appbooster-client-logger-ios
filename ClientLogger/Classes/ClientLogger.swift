@@ -33,7 +33,6 @@ public class ClientLogger: NSObject {
     }
   }
   static public private(set) var writingEnabled: Bool = false
-  static public private(set) var urlToUpload: URL?
   static private var blocks: [() -> Void] = []
 
   static private let accessQueue = DispatchQueue(label: "LogsAccess",
@@ -42,11 +41,10 @@ public class ClientLogger: NSObject {
 
   // MARK: Activation
 
-  static public func activate(writeLogs: Bool, uploadToURL: URL? = nil) {
+  static public func activate(writeLogs: Bool) {
     removeLogFile(prevDefaultLogFile)
     renameLogFile(defaultLogFile, to: prevDefaultLogFile)
     writingEnabled = writeLogs
-    urlToUpload = uploadToURL
     activated = true
   }
 
@@ -206,7 +204,7 @@ public class ClientLogger: NSObject {
   // MARK: Open Log
 
   static public func add5TapsGestureToView(_ view: UIView) -> UITapGestureRecognizer {
-    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sendOrOpenLogs))
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openLogs(from:)))
     gestureRecognizer.numberOfTapsRequired = 5
     view.addGestureRecognizer(gestureRecognizer)
 
@@ -225,20 +223,14 @@ public class ClientLogger: NSObject {
   @objc
   static private func handleLongPressGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
     if gestureRecognizer.state == .began {
-      ClientLogger.sendOrOpenLogs()
+      ClientLogger.openLogs()
     }
   }
 
   @objc
-  static public func sendOrOpenLogs() {
-    if let url = urlToUpload {
-      // TODO: upload log to url and show UI feedback to user
-    } else {
-      openLogs()
-    }
-  }
-
-  static public func openLogs() {
+  static public func openLogs(
+    from: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
+    ) {
     let vc = ClientLoggerListViewController()
     let nc = UINavigationController(rootViewController: vc)
     nc.navigationBar.isTranslucent = false
@@ -247,7 +239,7 @@ public class ClientLogger: NSObject {
     nc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
     nc.modalPresentationStyle = .overCurrentContext
     nc.modalTransitionStyle = .coverVertical
-    UIApplication.shared.keyWindow?.rootViewController?.present(nc, animated: true, completion: nil)
+    from?.present(nc, animated: true, completion: nil)
   }
 
   // MARK: Others
