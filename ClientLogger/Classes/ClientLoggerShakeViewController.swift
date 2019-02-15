@@ -11,6 +11,7 @@ import UIKit
 open class ClientLoggerShakeViewController: UIViewController {
 
   open var file: String = ClientLogger.defaultLogFile
+  open weak var from: UIViewController?
   open var shakeGestureIsEnabled: Bool = true
 
   // MARK: UIResponder
@@ -21,7 +22,7 @@ open class ClientLoggerShakeViewController: UIViewController {
 
   override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
     if shakeGestureIsEnabled && motion == .motionShake {
-      ClientLogger.openLogs()
+      ClientLogger.openLogs(from: from ?? self)
     }
   }
 
