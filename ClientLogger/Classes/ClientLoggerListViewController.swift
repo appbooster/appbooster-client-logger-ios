@@ -24,8 +24,10 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
     title = "Version \(UIApplication.appVersion)"
 
     let closeBarButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
+    let clearBarButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(clear))
 
     navigationItem.setLeftBarButton(closeBarButton, animated: false)
+    navigationItem.setRightBarButton(clearBarButton, animated: false)
 
     tableView = UITableView()
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -70,6 +72,28 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
   @objc
   private func close() {
     dismiss(animated: true, completion: nil)
+  }
+
+  @objc
+  private func clear() {
+    let alertController = UIAlertController(title: "Warning",
+                                            message: "Do you really want to clear all the data?",
+                                            preferredStyle: .alert)
+
+    let clearAlertAction = UIAlertAction(title: "Clear", style: .destructive) { _ in
+      clearUserDefaults()
+      clearKeychain()
+      clearCookies()
+      clearFiles()
+
+      exit(0)
+    }
+    alertController.addAction(clearAlertAction)
+
+    let cancelAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    alertController.addAction(cancelAlertAction)
+
+    present(alertController, animated: true, completion: nil)
   }
 
   private func refreshLogs() {

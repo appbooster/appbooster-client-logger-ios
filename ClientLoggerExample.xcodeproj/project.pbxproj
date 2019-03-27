@@ -12,6 +12,7 @@
 		431D1C0F21D39FA500F40D2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431D1C0D21D39FA500F40D2B /* Main.storyboard */; };
 		431D1C1121D39FA600F40D2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 431D1C1021D39FA600F40D2B /* Assets.xcassets */; };
 		431D1C1421D39FA600F40D2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431D1C1221D39FA600F40D2B /* LaunchScreen.storyboard */; };
+		4376DC16224B9DFC0026CF19 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376DC15224B9DFC0026CF19 /* Utility.swift */; };
 		4394D5F121D3A2A5004DE44C /* ClientLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F021D3A2A5004DE44C /* ClientLogger.swift */; };
 		4394D5F321D3A2BB004DE44C /* ClientLoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F221D3A2BB004DE44C /* ClientLoggerViewController.swift */; };
 		4394D5F521D4BC1E004DE44C /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F421D4BC1E004DE44C /* UIApplication+Version.swift */; };
@@ -28,6 +29,7 @@
 		431D1C1021D39FA600F40D2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		431D1C1321D39FA600F40D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		431D1C1521D39FA600F40D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4376DC15224B9DFC0026CF19 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		4394D5F021D3A2A5004DE44C /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
 		4394D5F221D3A2BB004DE44C /* ClientLoggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoggerViewController.swift; sourceTree = "<group>"; };
 		4394D5F421D4BC1E004DE44C /* UIApplication+Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				4394D5F221D3A2BB004DE44C /* ClientLoggerViewController.swift */,
 				4394D5F621D4D004004DE44C /* ClientLoggerShakeViewController.swift */,
 				4394D5F421D4BC1E004DE44C /* UIApplication+Version.swift */,
+				4376DC15224B9DFC0026CF19 /* Utility.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			files = (
 				4394D5F721D4D004004DE44C /* ClientLoggerShakeViewController.swift in Sources */,
 				4394D5F321D3A2BB004DE44C /* ClientLoggerViewController.swift in Sources */,
+				4376DC16224B9DFC0026CF19 /* Utility.swift in Sources */,
 				4394D5F921D60806004DE44C /* ClientLoggerListViewController.swift in Sources */,
 				431D1C0C21D39FA500F40D2B /* ViewController.swift in Sources */,
 				4394D5F521D4BC1E004DE44C /* UIApplication+Version.swift in Sources */,
