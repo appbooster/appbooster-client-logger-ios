@@ -24,9 +24,7 @@ public class ClientLogger: NSObject {
   static private var activated: Bool = false {
     didSet {
       if writingEnabled {
-        for block in blocks {
-          block()
-        }
+        processBlocks()
       } else {
         blocks.removeAll()
       }
@@ -36,8 +34,7 @@ public class ClientLogger: NSObject {
   static private var blocks: [() -> Void] = []
 
   static private let accessQueue = DispatchQueue(label: "LogsAccess",
-                                                 qos: .background,
-                                                 attributes: .concurrent)
+                                                 qos: .background)
 
   // MARK: Activation
 
@@ -60,27 +57,23 @@ public class ClientLogger: NSObject {
       guard let logs = logsPath,
         let filePath = pathToFile(toFile) else { return }
 
-      if !FileManager.default.fileExists(atPath: logs) {
-        do {
-          try FileManager.default.createDirectory(atPath: logs, withIntermediateDirectories: false, attributes: [:])
-        } catch let error {
-          print(error)
-
-          return
+      accessQueue.sync {
+        if !FileManager.default.fileExists(atPath: logs) {
+          do {
+            try FileManager.default.createDirectory(atPath: logs, withIntermediateDirectories: false, attributes: [:])
+          } catch {
+            return
+          }
         }
-      }
 
-      if !FileManager.default.fileExists(atPath: filePath) {
-        do {
-          try "".write(toFile: filePath, atomically: true, encoding: .utf8)
-        } catch let error {
-          print(error)
-
-          return
+        if !FileManager.default.fileExists(atPath: filePath) {
+          do {
+            try "".write(toFile: filePath, atomically: true, encoding: .utf8)
+          } catch {
+            return
+          }
         }
-      }
 
-      accessQueue.async(flags: .barrier) {
         let fileHandle = FileHandle(forWritingAtPath: filePath)
         fileHandle?.seekToEndOfFile()
 
@@ -96,7 +89,8 @@ public class ClientLogger: NSObject {
 
     if activated {
       if writingEnabled {
-        write()
+        blocks.append(write)
+        processBlocks()
       }
     } else {
       blocks.append(write)
@@ -110,23 +104,28 @@ public class ClientLogger: NSObject {
   }
 
   static public func readLogFromFile(_ file: String, completion: @escaping (String?) -> Void) {
-    guard let filePath = pathToFile(file),
-      FileManager.default.fileExists(atPath: filePath) else {
+    guard let filePath = pathToFile(file) else {
       completion(nil)
 
       return
     }
 
     accessQueue.sync {
+      guard FileManager.default.fileExists(atPath: filePath) else {
+        DispatchQueue.main.async {
+          completion(nil)
+        }
+
+        return
+      }
+
       do {
         let str = try String(contentsOfFile: filePath, encoding: .utf8)
 
         DispatchQueue.main.async {
           completion(str)
         }
-      } catch let error {
-        print(error)
-
+      } catch {
         DispatchQueue.main.async {
           completion(nil)
         }
@@ -141,14 +140,21 @@ public class ClientLogger: NSObject {
   }
 
   static public func logDataFromFile(_ file: String, completion: @escaping (Data?) -> Void) {
-    guard let filePath = pathToFile(file),
-      FileManager.default.fileExists(atPath: filePath) else {
+    guard let filePath = pathToFile(file) else {
       completion(nil)
 
       return
     }
 
     accessQueue.sync {
+      guard FileManager.default.fileExists(atPath: filePath) else {
+        DispatchQueue.main.async {
+          completion(nil)
+        }
+
+        return
+      }
+
       do {
         let str = try String(contentsOfFile: filePath, encoding: .utf8)
         let data = str.data(using: .utf8)
@@ -156,9 +162,7 @@ public class ClientLogger: NSObject {
         DispatchQueue.main.async {
           completion(data)
         }
-      } catch let error {
-        print(error)
-
+      } catch {
         DispatchQueue.main.async {
           completion(nil)
         }
@@ -173,14 +177,15 @@ public class ClientLogger: NSObject {
   }
 
   static public func removeLogFile(_ file: String) {
-    guard let filePath = pathToFile(file),
-      FileManager.default.fileExists(atPath: filePath) else { return }
+    guard let filePath = pathToFile(file) else { return }
 
-    accessQueue.async(flags: .barrier) {
+    accessQueue.sync {
+      guard FileManager.default.fileExists(atPath: filePath) else { return }
+
       do {
         try FileManager.default.removeItem(atPath: filePath)
-      } catch let error {
-        print(error)
+      } catch {
+        //
       }
     }
   }
@@ -189,14 +194,15 @@ public class ClientLogger: NSObject {
 
   static private func renameLogFile(_ file: String, to: String) {
     guard let filePath = pathToFile(file),
-      let toPath = pathToFile(to),
-      FileManager.default.fileExists(atPath: filePath) else { return }
+      let toPath = pathToFile(to) else { return }
 
-    accessQueue.async(flags: .barrier) {
+    accessQueue.sync {
+      guard FileManager.default.fileExists(atPath: filePath) else { return }
+
       do {
         try FileManager.default.moveItem(atPath: filePath, toPath: toPath)
-      } catch let error {
-        print(error)
+      } catch {
+        //
       }
     }
   }
@@ -244,6 +250,14 @@ public class ClientLogger: NSObject {
 
   // MARK: Others
 
+  static private func processBlocks() {
+    if writingEnabled, let block = blocks.first {
+      block()
+      _ = blocks.removeFirst()
+      processBlocks()
+    }
+  }
+
   static var logsList: [String] {
     guard let logs = logsPath else { return [] }
 
@@ -261,7 +275,7 @@ public class ClientLogger: NSObject {
   static private func documentsPathWithPathComponent(_ pathComponent: String) -> String? {
     guard let documentsPath =
       NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
-      return nil
+        return nil
     }
 
     return "\(documentsPath)/\(pathComponent)"
