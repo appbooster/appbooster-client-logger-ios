@@ -76,17 +76,26 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
 
   @objc
   private func clear() {
+    showConfirmationAlert()
+  }
+
+  private func refreshLogs() {
+    files = ClientLogger.logsList
+    tableView.reloadData()
+  }
+
+  private func showConfirmationAlert() {
     let alertController = UIAlertController(title: "Warning",
                                             message: "Do you really want to clear all the data?",
                                             preferredStyle: .alert)
 
-    let clearAlertAction = UIAlertAction(title: "Clear", style: .destructive) { _ in
+    let clearAlertAction = UIAlertAction(title: "Clear", style: .destructive) { [unowned self] _ in
       clearUserDefaults()
       clearKeychain()
       clearCookies()
       clearFiles()
 
-      exit(0)
+      self.showExitAlert()
     }
     alertController.addAction(clearAlertAction)
 
@@ -96,9 +105,19 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
     present(alertController, animated: true, completion: nil)
   }
 
-  private func refreshLogs() {
-    files = ClientLogger.logsList
-    tableView.reloadData()
+  private func showExitAlert() {
+    let alertController = UIAlertController(title: """
+Device token was reseted.
+The app will be closed by tap on OK button.
+""",
+                                            message: nil,
+                                            preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: "OK", style: .default) { _ in
+      exit(0)
+    }
+    alertController.addAction(alertAction)
+
+    present(alertController, animated: true, completion: nil)
   }
 
 }
