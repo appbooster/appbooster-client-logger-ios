@@ -132,6 +132,7 @@
 				TargetAttributes = {
 					431D1C0521D39FA500F40D2B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1160;
 					};
 				};
 			};
@@ -334,7 +335,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Appbooster.ClientLoggerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -353,7 +354,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Appbooster.ClientLoggerExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AppboosterClientLogger'
-  s.version          = '1.0.7'
+  s.version          = '1.0.8'
   s.summary          = 'iOS Client Logger framework.'
 
 # This description is used to generate tags and improve search results.
@@ -37,5 +37,7 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
+
+  s.swift_version = "5.0"
   
 end
