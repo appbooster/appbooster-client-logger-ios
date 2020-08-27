@@ -1,8 +1,8 @@
 //
-//  ClientLogger.swift
-//  ClientLoggerExample
+//  AppboosterClientLogger.swift
+//  AppboosterClientLogger
 //
-//  Created by Vladimir Vasilev on 26/12/2018.
+//  Created by Appbooster on 26/12/2018.
 //  Copyright © 2018 Appbooster. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ private let sharedDateFormatter: DateFormatter = {
   return dateFormatter
 }()
 
-public class ClientLogger: NSObject {
+public class AppboosterClientLogger: NSObject {
 
   static public let defaultLogFile: String = "DefaultLog"
   static public let prevDefaultLogFile: String = "PrevDefaultLog"
@@ -36,7 +36,7 @@ public class ClientLogger: NSObject {
   static private let accessQueue = DispatchQueue(label: "LogsAccess",
                                                  qos: .background)
 
-  // MARK: Activation
+  // MARK: - Activation
 
   static public func activate(writeLogs: Bool) {
     removeLogFile(prevDefaultLogFile)
@@ -45,7 +45,7 @@ public class ClientLogger: NSObject {
     activated = true
   }
 
-  // MARK: Write
+  // MARK: - Write
 
   static public func writeLineToDefaultLogFile(_ string: String) {
     writeLine(string, toFile: defaultLogFile)
@@ -97,7 +97,7 @@ public class ClientLogger: NSObject {
     }
   }
 
-  // MARK: Read
+  // MARK: - Read
 
   static public func readDefaultLogFile(completion: @escaping (String?) -> Void) {
     return readLogFromFile(defaultLogFile, completion: completion)
@@ -133,7 +133,7 @@ public class ClientLogger: NSObject {
     }
   }
 
-  // MARK: Data
+  // MARK: - Data
 
   static public func defaultLogFileData(completion: @escaping (Data?) -> Void) {
     return logDataFromFile(defaultLogFile, completion: completion)
@@ -170,7 +170,7 @@ public class ClientLogger: NSObject {
     }
   }
 
-  // MARK: Remove
+  // MARK: - Remove
 
   static public func removeDefaultLogFile() {
     removeLogFile(defaultLogFile)
@@ -190,7 +190,7 @@ public class ClientLogger: NSObject {
     }
   }
 
-  // MARK: Rename
+  // MARK: - Rename
 
   static private func renameLogFile(_ file: String, to: String) {
     guard let filePath = pathToFile(file),
@@ -207,7 +207,7 @@ public class ClientLogger: NSObject {
     }
   }
 
-  // MARK: Open Log
+  // MARK: - Open Log
 
   static public func add5TapsGestureToView(_ view: UIView) -> UITapGestureRecognizer {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openLogs(from:)))
@@ -217,7 +217,7 @@ public class ClientLogger: NSObject {
     return gestureRecognizer
   }
 
-  static public func add2SecondsTapGestureToView(_ view: UIView) -> UILongPressGestureRecognizer {
+  static public func add2SecondsPressGestureToView(_ view: UIView) -> UILongPressGestureRecognizer {
     let gestureRecognizer = UILongPressGestureRecognizer(target: self,
                                                          action: #selector(handleLongPressGestureRecognizer))
     gestureRecognizer.minimumPressDuration = 2.0
@@ -229,7 +229,7 @@ public class ClientLogger: NSObject {
   @objc
   static private func handleLongPressGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
     if gestureRecognizer.state == .began {
-      ClientLogger.openLogs()
+      AppboosterClientLogger.openLogs()
     }
   }
 
@@ -237,7 +237,7 @@ public class ClientLogger: NSObject {
   static public func openLogs(
     from: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
     ) {
-    let vc = ClientLoggerListViewController()
+    let vc = AppboosterClientLoggerListViewController()
     let nc = UINavigationController(rootViewController: vc)
     nc.navigationBar.isTranslucent = false
     nc.navigationBar.isOpaque = true
@@ -248,7 +248,7 @@ public class ClientLogger: NSObject {
     from?.present(nc, animated: true, completion: nil)
   }
 
-  // MARK: Others
+  // MARK: - Others
 
   static private func processBlocks() {
     if writingEnabled, let block = blocks.first {

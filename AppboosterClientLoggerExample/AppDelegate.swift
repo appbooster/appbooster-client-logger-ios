@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  ClientLoggerExample
+//  AppboosterClientLoggerExample
 //
-//  Created by Vladimir Vasilev on 26/12/2018.
+//  Created by Appbooster on 26/12/2018.
 //  Copyright © 2018 Appbooster. All rights reserved.
 //
 
@@ -16,9 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 
-    /* Activation of ClientLogger, you can control the logs writing */
+    /* Activation of AppboosterClientLogger, you can control the logs writing */
 
-    ClientLogger.activate(writeLogs: true)
+    AppboosterClientLogger.activate(writeLogs: true)
 
     return true
   }

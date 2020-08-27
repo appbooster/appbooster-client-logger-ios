@@ -1,8 +1,8 @@
 //
 //  Utility.swift
-//  ClientLoggerExample
+//  AppboosterClientLogger
 //
-//  Created by Vladimir Vasilev on 27/03/2019.
+//  Created by Appbooster on 27/03/2019.
 //  Copyright © 2019 Appbooster. All rights reserved.
 //
 

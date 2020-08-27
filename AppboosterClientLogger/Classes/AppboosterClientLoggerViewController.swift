@@ -1,15 +1,15 @@
 //
-//  ClientLoggerViewController.swift
-//  ClientLoggerExample
+//  AppboosterClientLoggerViewController.swift
+//  AppboosterClientLogger
 //
-//  Created by Vladimir Vasilev on 26/12/2018.
+//  Created by Appbooster on 26/12/2018.
 //  Copyright © 2018 Appbooster. All rights reserved.
 //
 
 import UIKit
 import MessageUI
 
-class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class AppboosterClientLoggerViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
   private var textView: UITextView!
   private var activityIndicatorViewView: UIView!
@@ -20,7 +20,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
   var file: String!
   var reloadList: (() -> Void)!
 
-  // MARK: UIViewController
+  // MARK: - UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -74,7 +74,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
                                            y: activityIndicatorViewSize / 2)
   }
 
-  // MARK: MFMailComposeViewControllerDelegate
+  // MARK: - MFMailComposeViewControllerDelegate
 
   func mailComposeController(_ controller: MFMailComposeViewController,
                              didFinishWith result: MFMailComposeResult,
@@ -86,7 +86,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
     controller.dismiss(animated: true, completion: nil)
   }
 
-  // MARK: Others
+  // MARK: - Others
 
   @objc
   private func back() {
@@ -95,7 +95,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
 
   @objc
   private func remove() {
-    ClientLogger.removeLogFile(file)
+    AppboosterClientLogger.removeLogFile(file)
     reloadList()
     back()
   }
@@ -125,7 +125,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
 
   @objc
   private func share() {
-    if let path = ClientLogger.pathToFile(file) {
+    if let path = AppboosterClientLogger.pathToFile(file) {
       let url = URL(fileURLWithPath: path)
       let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
       present(vc, animated: true, completion: nil)
@@ -159,7 +159,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
   private func refreshLog() {
     activityIndicatorViewView.isHidden = false
 
-    ClientLogger.readLogFromFile(file, completion: { [weak self] log in
+    AppboosterClientLogger.readLogFromFile(file, completion: { [weak self] log in
       guard let self = self else { return }
 
       self.textView.text = log
@@ -179,7 +179,7 @@ class ClientLoggerViewController: UIViewController, MFMailComposeViewControllerD
 
   private func tryToSendMail(_ text: String? = nil) {
     if MFMailComposeViewController.canSendMail() {
-      ClientLogger.logDataFromFile(file, completion: { [weak self] data in
+      AppboosterClientLogger.logDataFromFile(file, completion: { [weak self] data in
         guard let self = self else { return }
 
         if let data = data {

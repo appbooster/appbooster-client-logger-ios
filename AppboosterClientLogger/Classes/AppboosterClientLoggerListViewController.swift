@@ -1,14 +1,14 @@
 //
-//  ClientLoggerListViewController.swift
-//  ClientLoggerExample
+//  AppboosterClientLoggerListViewController.swift
+//  AppboosterClientLogger
 //
-//  Created by Vladimir Vasilev on 28/12/2018.
+//  Created by Appbooster on 28/12/2018.
 //  Copyright © 2018 Appbooster. All rights reserved.
 //
 
 import UIKit
 
-class ClientLoggerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AppboosterClientLoggerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
   private var tableView: UITableView!
 
@@ -16,7 +16,7 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
 
   private var files: [String] = []
 
-  // MARK: UIViewController
+  // MARK: - UIViewController
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,7 +44,7 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
     tableView.frame = view.bounds
   }
 
-  // MARK: UITableViewDataSource
+  // MARK: - UITableViewDataSource
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return files.count
@@ -58,16 +58,16 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
     return cell
   }
 
-  // MARK: UITableViewDelegate
+  // MARK: - UITableViewDelegate
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let vc = ClientLoggerViewController()
+    let vc = AppboosterClientLoggerViewController()
     vc.file = files[indexPath.row]
     vc.reloadList = refreshLogs
     navigationController?.pushViewController(vc, animated: true)
   }
 
-  // MARK: Others
+  // MARK: - Others
 
   @objc
   private func close() {
@@ -80,7 +80,7 @@ class ClientLoggerListViewController: UIViewController, UITableViewDataSource, U
   }
 
   private func refreshLogs() {
-    files = ClientLogger.logsList
+    files = AppboosterClientLogger.logsList
     tableView.reloadData()
   }
 

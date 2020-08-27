@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  ClientLoggerExample
+//  AppboosterClientLoggerExample
 //
-//  Created by Vladimir Vasilev on 26/12/2018.
+//  Created by Appbooster on 26/12/2018.
 //  Copyright © 2018 Appbooster. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 
 /* To use shake gesture to open log just inherit from ClientLoggerShakeViewController and define file property */
 
-class ViewController: ClientLoggerShakeViewController {
+class ViewController: AppboosterClientLoggerShakeViewController {
 
   @IBOutlet private weak var defaultTextView: UITextView!
   @IBOutlet private weak var customTextView: UITextView!
@@ -24,11 +24,11 @@ class ViewController: ClientLoggerShakeViewController {
 
     /* Add 5 taps gesture to view to open log */
 
-    _ = ClientLogger.add5TapsGestureToView(view)
+    _ = AppboosterClientLogger.add5TapsGestureToView(view)
 
     /* Add 2 seconds long press gesture to view to open log */
 
-    _ = ClientLogger.add2SecondsTapGestureToView(view)
+    _ = AppboosterClientLogger.add2SecondsPressGestureToView(view)
   }
 
   // MARK: Actions
@@ -37,21 +37,21 @@ class ViewController: ClientLoggerShakeViewController {
 
     /* Write line to default log */
 
-    ClientLogger.writeLineToDefaultLogFile("Something To Default At \(Date())")
+    AppboosterClientLogger.writeLineToDefaultLogFile("Something To Default At \(Date())")
   }
 
   @IBAction private func writeToCustom() {
 
     /* Write line to custom log */
 
-    ClientLogger.writeLine("Something To YourFile At \(Date())", toFile: customFile)
+    AppboosterClientLogger.writeLine("Something To YourFile At \(Date())", toFile: customFile)
   }
 
   @IBAction private func readFromDefault() {
 
     /* Read log from default log */
 
-    ClientLogger.readDefaultLogFile(completion: { [weak self] log in
+    AppboosterClientLogger.readDefaultLogFile(completion: { [weak self] log in
       self?.defaultTextView.text = log
     })
   }
@@ -60,7 +60,7 @@ class ViewController: ClientLoggerShakeViewController {
 
     /* Read log from custom log */
 
-    ClientLogger.readLogFromFile(customFile, completion: { [weak self] log in
+    AppboosterClientLogger.readLogFromFile(customFile, completion: { [weak self] log in
       self?.customTextView.text = log
     })
   }
@@ -69,21 +69,21 @@ class ViewController: ClientLoggerShakeViewController {
 
     /* Remove default log */
 
-    ClientLogger.removeDefaultLogFile()
+    AppboosterClientLogger.removeDefaultLogFile()
   }
 
   @IBAction private func removeCustom() {
 
     /* Remove custom log */
 
-    ClientLogger.removeLogFile(customFile)
+    AppboosterClientLogger.removeLogFile(customFile)
   }
 
   @IBAction private func openLogs() {
 
     /* Open logs */
 
-    ClientLogger.openLogs()
+    AppboosterClientLogger.openLogs()
   }
 
 }

@@ -1,20 +1,20 @@
 //
-//  ClientLoggerShakeViewController.swift
-//  ClientLoggerExample
+//  AppboosterClientLoggerShakeViewController.swift
+//  AppboosterClientLogger
 //
-//  Created by Vladimir Vasilev on 27/12/2018.
+//  Created by Appbooster on 27/12/2018.
 //  Copyright © 2018 Appbooster. All rights reserved.
 //
 
 import UIKit
 
-open class ClientLoggerShakeViewController: UIViewController {
+open class AppboosterClientLoggerShakeViewController: UIViewController {
 
-  open var file: String = ClientLogger.defaultLogFile
+  open var file: String = AppboosterClientLogger.defaultLogFile
   open weak var from: UIViewController?
   open var shakeGestureIsEnabled: Bool = true
 
-  // MARK: UIResponder
+  // MARK: - UIResponder
 
   override open var canBecomeFirstResponder: Bool {
     return true
@@ -22,11 +22,11 @@ open class ClientLoggerShakeViewController: UIViewController {
 
   override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
     if shakeGestureIsEnabled && motion == .motionShake {
-      ClientLogger.openLogs(from: from ?? self)
+      AppboosterClientLogger.openLogs(from: from ?? self)
     }
   }
 
-  // MARK: UIViewController
+  // MARK: - UIViewController
 
   override open func viewDidLoad() {
     super.viewDidLoad()

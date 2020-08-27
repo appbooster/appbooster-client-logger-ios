@@ -13,16 +13,15 @@
 		431D1C1121D39FA600F40D2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 431D1C1021D39FA600F40D2B /* Assets.xcassets */; };
 		431D1C1421D39FA600F40D2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431D1C1221D39FA600F40D2B /* LaunchScreen.storyboard */; };
 		4376DC16224B9DFC0026CF19 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4376DC15224B9DFC0026CF19 /* Utility.swift */; };
-		4394D5F121D3A2A5004DE44C /* ClientLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F021D3A2A5004DE44C /* ClientLogger.swift */; };
-		4394D5F321D3A2BB004DE44C /* ClientLoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F221D3A2BB004DE44C /* ClientLoggerViewController.swift */; };
+		4394D5F121D3A2A5004DE44C /* AppboosterClientLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F021D3A2A5004DE44C /* AppboosterClientLogger.swift */; };
+		4394D5F321D3A2BB004DE44C /* AppboosterClientLoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F221D3A2BB004DE44C /* AppboosterClientLoggerViewController.swift */; };
 		4394D5F521D4BC1E004DE44C /* UIApplication+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F421D4BC1E004DE44C /* UIApplication+Version.swift */; };
-		4394D5F721D4D004004DE44C /* ClientLoggerShakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F621D4D004004DE44C /* ClientLoggerShakeViewController.swift */; };
-		4394D5F921D60806004DE44C /* ClientLoggerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F821D60806004DE44C /* ClientLoggerListViewController.swift */; };
-		A5ABCDA11887E7A2D6710EBE /* Pods_ClientLoggerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8E7604C25E93B468197687 /* Pods_ClientLoggerExample.framework */; };
+		4394D5F721D4D004004DE44C /* AppboosterClientLoggerShakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F621D4D004004DE44C /* AppboosterClientLoggerShakeViewController.swift */; };
+		4394D5F921D60806004DE44C /* AppboosterClientLoggerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4394D5F821D60806004DE44C /* AppboosterClientLoggerListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		431D1C0621D39FA500F40D2B /* ClientLoggerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClientLoggerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		431D1C0621D39FA500F40D2B /* AppboosterClientLoggerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppboosterClientLoggerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		431D1C0921D39FA500F40D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		431D1C0B21D39FA500F40D2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		431D1C0E21D39FA500F40D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -30,14 +29,11 @@
 		431D1C1321D39FA600F40D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		431D1C1521D39FA600F40D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4376DC15224B9DFC0026CF19 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		4394D5F021D3A2A5004DE44C /* ClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLogger.swift; sourceTree = "<group>"; };
-		4394D5F221D3A2BB004DE44C /* ClientLoggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoggerViewController.swift; sourceTree = "<group>"; };
+		4394D5F021D3A2A5004DE44C /* AppboosterClientLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppboosterClientLogger.swift; sourceTree = "<group>"; };
+		4394D5F221D3A2BB004DE44C /* AppboosterClientLoggerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppboosterClientLoggerViewController.swift; sourceTree = "<group>"; };
 		4394D5F421D4BC1E004DE44C /* UIApplication+Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Version.swift"; sourceTree = "<group>"; };
-		4394D5F621D4D004004DE44C /* ClientLoggerShakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoggerShakeViewController.swift; sourceTree = "<group>"; };
-		4394D5F821D60806004DE44C /* ClientLoggerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientLoggerListViewController.swift; sourceTree = "<group>"; };
-		8C8E7604C25E93B468197687 /* Pods_ClientLoggerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ClientLoggerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9CA95D75EE4BB17DECF1D25E /* Pods-ClientLoggerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClientLoggerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ClientLoggerExample/Pods-ClientLoggerExample.release.xcconfig"; sourceTree = "<group>"; };
-		F083BD50A033A374DED71516 /* Pods-ClientLoggerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClientLoggerExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClientLoggerExample/Pods-ClientLoggerExample.debug.xcconfig"; sourceTree = "<group>"; };
+		4394D5F621D4D004004DE44C /* AppboosterClientLoggerShakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppboosterClientLoggerShakeViewController.swift; sourceTree = "<group>"; };
+		4394D5F821D60806004DE44C /* AppboosterClientLoggerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppboosterClientLoggerListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,28 +41,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5ABCDA11887E7A2D6710EBE /* Pods_ClientLoggerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		38AC86C87EBE46CAC2C95566 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				8C8E7604C25E93B468197687 /* Pods_ClientLoggerExample.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		431D1BFD21D39FA500F40D2B = {
 			isa = PBXGroup;
 			children = (
-				431D1C0821D39FA500F40D2B /* ClientLoggerExample */,
+				431D1C0821D39FA500F40D2B /* AppboosterClientLoggerExample */,
 				431D1C0721D39FA500F40D2B /* Products */,
-				95D32CAAB0E70A2D13C3F96C /* Pods */,
-				38AC86C87EBE46CAC2C95566 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -75,15 +60,15 @@
 		431D1C0721D39FA500F40D2B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				431D1C0621D39FA500F40D2B /* ClientLoggerExample.app */,
+				431D1C0621D39FA500F40D2B /* AppboosterClientLoggerExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		431D1C0821D39FA500F40D2B /* ClientLoggerExample */ = {
+		431D1C0821D39FA500F40D2B /* AppboosterClientLoggerExample */ = {
 			isa = PBXGroup;
 			children = (
-				4394D5EE21D3A297004DE44C /* ClientLogger */,
+				4394D5EE21D3A297004DE44C /* AppboosterClientLogger */,
 				431D1C0921D39FA500F40D2B /* AppDelegate.swift */,
 				431D1C0B21D39FA500F40D2B /* ViewController.swift */,
 				431D1C0D21D39FA500F40D2B /* Main.storyboard */,
@@ -91,60 +76,48 @@
 				431D1C1221D39FA600F40D2B /* LaunchScreen.storyboard */,
 				431D1C1521D39FA600F40D2B /* Info.plist */,
 			);
-			path = ClientLoggerExample;
+			path = AppboosterClientLoggerExample;
 			sourceTree = "<group>";
 		};
-		4394D5EE21D3A297004DE44C /* ClientLogger */ = {
+		4394D5EE21D3A297004DE44C /* AppboosterClientLogger */ = {
 			isa = PBXGroup;
 			children = (
 				4394D5EF21D3A297004DE44C /* Classes */,
 			);
-			path = ClientLogger;
+			path = AppboosterClientLogger;
 			sourceTree = SOURCE_ROOT;
 		};
 		4394D5EF21D3A297004DE44C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				4394D5F021D3A2A5004DE44C /* ClientLogger.swift */,
-				4394D5F821D60806004DE44C /* ClientLoggerListViewController.swift */,
-				4394D5F221D3A2BB004DE44C /* ClientLoggerViewController.swift */,
-				4394D5F621D4D004004DE44C /* ClientLoggerShakeViewController.swift */,
+				4394D5F021D3A2A5004DE44C /* AppboosterClientLogger.swift */,
+				4394D5F821D60806004DE44C /* AppboosterClientLoggerListViewController.swift */,
+				4394D5F221D3A2BB004DE44C /* AppboosterClientLoggerViewController.swift */,
+				4394D5F621D4D004004DE44C /* AppboosterClientLoggerShakeViewController.swift */,
 				4394D5F421D4BC1E004DE44C /* UIApplication+Version.swift */,
 				4376DC15224B9DFC0026CF19 /* Utility.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		95D32CAAB0E70A2D13C3F96C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F083BD50A033A374DED71516 /* Pods-ClientLoggerExample.debug.xcconfig */,
-				9CA95D75EE4BB17DECF1D25E /* Pods-ClientLoggerExample.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		431D1C0521D39FA500F40D2B /* ClientLoggerExample */ = {
+		431D1C0521D39FA500F40D2B /* AppboosterClientLoggerExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 431D1C1821D39FA600F40D2B /* Build configuration list for PBXNativeTarget "ClientLoggerExample" */;
+			buildConfigurationList = 431D1C1821D39FA600F40D2B /* Build configuration list for PBXNativeTarget "AppboosterClientLoggerExample" */;
 			buildPhases = (
-				D3A91C6F5B1C553876D7F5D8 /* [CP] Check Pods Manifest.lock */,
 				431D1C0221D39FA500F40D2B /* Sources */,
 				431D1C0321D39FA500F40D2B /* Frameworks */,
 				431D1C0421D39FA500F40D2B /* Resources */,
-				431D1C1B21D3A0E800F40D2B /* Swiftlint */,
-				6F61E3F66E672B869483A83B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = ClientLoggerExample;
+			name = AppboosterClientLoggerExample;
 			productName = ClientLoggerExample;
-			productReference = 431D1C0621D39FA500F40D2B /* ClientLoggerExample.app */;
+			productReference = 431D1C0621D39FA500F40D2B /* AppboosterClientLoggerExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -162,7 +135,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 431D1C0121D39FA500F40D2B /* Build configuration list for PBXProject "ClientLoggerExample" */;
+			buildConfigurationList = 431D1C0121D39FA500F40D2B /* Build configuration list for PBXProject "AppboosterClientLoggerExample" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -175,7 +148,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				431D1C0521D39FA500F40D2B /* ClientLoggerExample */,
+				431D1C0521D39FA500F40D2B /* AppboosterClientLoggerExample */,
 			);
 		};
 /* End PBXProject section */
@@ -193,83 +166,18 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		431D1C1B21D3A0E800F40D2B /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "swiftlint=\"${PODS_ROOT}/SwiftLint/swiftlint\"\nif which $swiftlint >/dev/null; then\n$swiftlint lint --config \"${PODS_ROOT}/swiftlint-config/.swiftlint.yml\"\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		6F61E3F66E672B869483A83B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ClientLoggerExample/Pods-ClientLoggerExample-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/swiftlint-config/swiftlint-config.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/swiftlint-config.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ClientLoggerExample/Pods-ClientLoggerExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D3A91C6F5B1C553876D7F5D8 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ClientLoggerExample-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		431D1C0221D39FA500F40D2B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4394D5F721D4D004004DE44C /* ClientLoggerShakeViewController.swift in Sources */,
-				4394D5F321D3A2BB004DE44C /* ClientLoggerViewController.swift in Sources */,
+				4394D5F721D4D004004DE44C /* AppboosterClientLoggerShakeViewController.swift in Sources */,
+				4394D5F321D3A2BB004DE44C /* AppboosterClientLoggerViewController.swift in Sources */,
 				4376DC16224B9DFC0026CF19 /* Utility.swift in Sources */,
-				4394D5F921D60806004DE44C /* ClientLoggerListViewController.swift in Sources */,
+				4394D5F921D60806004DE44C /* AppboosterClientLoggerListViewController.swift in Sources */,
 				431D1C0C21D39FA500F40D2B /* ViewController.swift in Sources */,
 				4394D5F521D4BC1E004DE44C /* UIApplication+Version.swift in Sources */,
-				4394D5F121D3A2A5004DE44C /* ClientLogger.swift in Sources */,
+				4394D5F121D3A2A5004DE44C /* AppboosterClientLogger.swift in Sources */,
 				431D1C0A21D39FA500F40D2B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,12 +322,11 @@
 		};
 		431D1C1921D39FA600F40D2B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F083BD50A033A374DED71516 /* Pods-ClientLoggerExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D397U8YR3X;
-				INFOPLIST_FILE = ClientLoggerExample/Info.plist;
+				INFOPLIST_FILE = AppboosterClientLoggerExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -434,12 +341,11 @@
 		};
 		431D1C1A21D39FA600F40D2B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CA95D75EE4BB17DECF1D25E /* Pods-ClientLoggerExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D397U8YR3X;
-				INFOPLIST_FILE = ClientLoggerExample/Info.plist;
+				INFOPLIST_FILE = AppboosterClientLoggerExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -455,7 +361,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		431D1C0121D39FA500F40D2B /* Build configuration list for PBXProject "ClientLoggerExample" */ = {
+		431D1C0121D39FA500F40D2B /* Build configuration list for PBXProject "AppboosterClientLoggerExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				431D1C1621D39FA600F40D2B /* Debug */,
@@ -464,7 +370,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		431D1C1821D39FA600F40D2B /* Build configuration list for PBXNativeTarget "ClientLoggerExample" */ = {
+		431D1C1821D39FA600F40D2B /* Build configuration list for PBXNativeTarget "AppboosterClientLoggerExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				431D1C1921D39FA600F40D2B /* Debug */,
