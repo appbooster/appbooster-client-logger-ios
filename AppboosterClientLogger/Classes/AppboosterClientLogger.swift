@@ -26,12 +26,15 @@ public class AppboosterClientLogger: NSObject {
       if writingEnabled {
         processBlocks()
       } else {
+        blocksLock.lock()
         blocks.removeAll()
+        blocksLock.unlock()
       }
     }
   }
   static public private(set) var writingEnabled: Bool = false
   static private var blocks: [() -> Void] = []
+  static private var blocksLock = NSLock()
 
   static private let accessQueue = DispatchQueue(label: "LogsAccess",
                                                  qos: .background)
@@ -89,11 +92,11 @@ public class AppboosterClientLogger: NSObject {
 
     if activated {
       if writingEnabled {
-        blocks.append(write)
+        blocks.append(write, &blocksLock)
         processBlocks()
       }
     } else {
-      blocks.append(write)
+      blocks.append(write, &blocksLock)
     }
   }
 
@@ -251,11 +254,22 @@ public class AppboosterClientLogger: NSObject {
   // MARK: - Others
 
   static private func processBlocks() {
-    if writingEnabled, let block = blocks.first {
-      block()
-      _ = blocks.removeFirst()
-      processBlocks()
+    guard writingEnabled else { return }
+
+    blocksLock.lock()
+
+    guard !blocks.isEmpty else {
+      blocksLock.unlock()
+
+      return
     }
+
+    let block = blocks.removeFirst()
+
+    blocksLock.unlock()
+
+    block()
+    processBlocks()
   }
 
   static var logsList: [String] {
@@ -291,4 +305,12 @@ public class AppboosterClientLogger: NSObject {
     return "\(logs)/\(file.replacingOccurrences(of: "/", with: ""))\(suffix)"
   }
 
+}
+
+extension Array {
+  fileprivate mutating func append(_ newElement: Element, _ lock: inout NSLock) {
+    lock.lock()
+    defer { lock.unlock() }
+    append(newElement)
+  }
 }
