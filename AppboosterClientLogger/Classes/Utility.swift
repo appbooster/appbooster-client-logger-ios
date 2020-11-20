@@ -30,6 +30,10 @@ func clearKeychain() {
   }
 }
 
+func clearURLCache() {
+  URLCache.shared.removeAllCachedResponses()
+}
+
 func clearCookies() {
   if let cookies = HTTPCookieStorage.shared.cookies {
     for cookie in cookies {
@@ -56,4 +60,12 @@ func clearFiles() {
         }
       }
   }
+}
+
+func clearAll() {
+  clearUserDefaults()
+  clearKeychain()
+  clearURLCache()
+  clearCookies()
+  clearFiles()
 }

@@ -8,6 +8,39 @@
 
 import UIKit
 
+enum ClearOption: CaseIterable {
+
+  case userDefaults
+  case keychain
+  case urlCache
+  case cookies
+  case files
+  case all
+
+  var title: String {
+    switch self {
+    case .userDefaults: return "User Defaults"
+    case .keychain: return "Keychain"
+    case .urlCache: return "URL Cache"
+    case .cookies: return "Cookies"
+    case .files: return "Files"
+    case .all: return "All"
+    }
+  }
+
+  func clear() {
+    switch self {
+    case .userDefaults: clearUserDefaults()
+    case .keychain: clearKeychain()
+    case .urlCache: clearURLCache()
+    case .cookies: clearCookies()
+    case .files: clearFiles()
+    case .all: clearAll()
+    }
+  }
+
+}
+
 class AppboosterClientLoggerListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
   private var tableView: UITableView!
@@ -76,7 +109,7 @@ class AppboosterClientLoggerListViewController: UIViewController, UITableViewDat
 
   @objc
   private func clear() {
-    showConfirmationAlert()
+    showChoiceActionSheet()
   }
 
   private func refreshLogs() {
@@ -84,20 +117,17 @@ class AppboosterClientLoggerListViewController: UIViewController, UITableViewDat
     tableView.reloadData()
   }
 
-  private func showConfirmationAlert() {
-    let alertController = UIAlertController(title: "Warning",
-                                            message: "Do you really want to clear all the data?",
-                                            preferredStyle: .alert)
+  private func showChoiceActionSheet() {
+    let alertController = UIAlertController(title: "What do you want to clear?",
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
 
-    let clearAlertAction = UIAlertAction(title: "Clear", style: .destructive) { [unowned self] _ in
-      clearUserDefaults()
-      clearKeychain()
-      clearCookies()
-      clearFiles()
-
-      self.showExitAlert()
-    }
-    alertController.addAction(clearAlertAction)
+    ClearOption.allCases.forEach({ option in
+      let action = UIAlertAction(title: option.title, style: .default) { [unowned self] _ in
+        self.showConfirmationDialog(clearOption: option)
+      }
+      alertController.addAction(action)
+    })
 
     let cancelAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
     alertController.addAction(cancelAlertAction)
@@ -105,17 +135,36 @@ class AppboosterClientLoggerListViewController: UIViewController, UITableViewDat
     present(alertController, animated: true, completion: nil)
   }
 
-  private func showExitAlert() {
-    let alertController = UIAlertController(title: """
-Device token was reseted.
-The app will be closed by tap on OK button.
-""",
-                                            message: nil,
+  private func showConfirmationDialog(clearOption: ClearOption) {
+    let alertController = UIAlertController(title: "Warning",
+                                            message: "Do you really want to clear \(clearOption.title.lowercased())?",
                                             preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "OK", style: .default) { _ in
+
+    let action = UIAlertAction(title: "Clear", style: .destructive) { [unowned self] _ in
+      clearOption.clear()
+
+      self.showExitDialog()
+    }
+    alertController.addAction(action)
+
+    let cancelAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    alertController.addAction(cancelAlertAction)
+
+    present(alertController, animated: true, completion: nil)
+  }
+
+  private func showExitDialog() {
+    let alertController = UIAlertController(title: "Exit",
+                                            message: "Do you want to exit the app?",
+                                            preferredStyle: .alert)
+
+    let action = UIAlertAction(title: "Exit", style: .destructive) { _ in
       exit(0)
     }
-    alertController.addAction(alertAction)
+    alertController.addAction(action)
+
+    let cancelAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    alertController.addAction(cancelAlertAction)
 
     present(alertController, animated: true, completion: nil)
   }
