@@ -14,6 +14,8 @@ class AppboosterClientLoggerViewController: UIViewController, MFMailComposeViewC
   private var textView: UITextView!
   private var activityIndicatorViewView: UIView!
   private var activityIndicatorView: UIActivityIndicatorView!
+  private var mailBarButton: UIBarButtonItem!
+  private var shareBarButton: UIBarButtonItem!
 
   private let activityIndicatorViewSize: CGFloat = 66.0
 
@@ -27,8 +29,8 @@ class AppboosterClientLoggerViewController: UIViewController, MFMailComposeViewC
 
     let backBarButton = UIBarButtonItem(title: "←", style: .plain, target: self, action: #selector(back))
     let removeBarButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(remove))
-    let mailBarButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(mail))
-    let shareBarButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
+    mailBarButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(mail))
+    shareBarButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
     let refreshBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
     let downBarButton = UIBarButtonItem(title: "↓", style: .plain, target: self, action: #selector(scrollToBottom))
     let upBarButton = UIBarButtonItem(title: "↑", style: .plain, target: self, action: #selector(scrollToTop))
@@ -103,6 +105,7 @@ class AppboosterClientLoggerViewController: UIViewController, MFMailComposeViewC
   @objc
   private func mail() {
     let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    alertController.popoverPresentationController?.barButtonItem = mailBarButton
     alertController.addAction(UIAlertAction(title: "Selected part", style: .default, handler: { [unowned self] _ in
       var text: String?
 
@@ -128,6 +131,7 @@ class AppboosterClientLoggerViewController: UIViewController, MFMailComposeViewC
     if let path = AppboosterClientLogger.pathToFile(file) {
       let url = URL(fileURLWithPath: path)
       let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+      vc.popoverPresentationController?.barButtonItem = shareBarButton
       present(vc, animated: true, completion: nil)
     }
   }
